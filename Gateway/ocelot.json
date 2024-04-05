@@ -1,0 +1,37 @@
+{
+  "Routes": [
+    // Auth Web Api
+    {
+      "DownstreamPathTemplate": "/api/auth/{catchAll}", //"/api/auth{everything}"
+      "DownstreamScheme": "https",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": 7258 // 7258 5080
+        }
+      ],
+      "UpstreamPathTemplate": "/api/auth/{catchAll}",
+      "UpstreamHttpMethod": [ "POST", "PUT", "GET", "DELETE" ],
+      "Priority": 100
+    },
+    // Product Web Api
+    {
+      //"DownstreamPathTemplate": "/api/product",
+      "DownstreamPathTemplate": "/api/{catchAll}",
+      "DownstreamScheme": "https",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": 7091 //7091 5194
+        }
+      ],
+     //"UpstreamPathTemplate": "/api/product",
+      "UpstreamPathTemplate": "/api/{catchAll}",
+      "UpstreamHttpMethod": [ "POST", "PUT", "GET", "DELETE" ]
+    }
+  ],
+  "GlobalConfiguration": {
+    "BaseUrl": "http://localhost:44354"
+  }
+
+}

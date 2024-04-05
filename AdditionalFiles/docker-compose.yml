@@ -1,0 +1,43 @@
+version: '3'
+
+services:
+  auth:
+    container_name: auth
+    build:
+      context: ../Auth
+      dockerfile: Dockerfile
+    ports:
+      - "5001:80"
+    networks:
+      - dddnet
+    volumes:
+      - ./Auth/appsettings.json:/app/appsettings.json
+      - ./Auth/appsettings.Development.json:/app/appsettings.Development.json
+
+  gateway:
+    container_name: gateway
+    build:
+      context: ../Gateway
+      dockerfile: Dockerfile
+    ports:
+      - "5002:80"
+    networks:
+      - dddnet
+    volumes:
+      - ./Gateway/ocelot.json:/app/ocelot.json
+
+  product:
+    container_name: product
+    build:
+      context: ../Product
+      dockerfile: Dockerfile
+    ports:
+      - "5003:80"
+    networks:
+      - dddnet
+    volumes:
+      - ./Product/appsettings.json:/app/appsettings.json
+      - ./Product/appsettings.Development.json:/app/appsettings.Development.json
+
+networks:
+  dddnet:

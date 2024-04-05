@@ -1,0 +1,37 @@
+<Project Sdk="Microsoft.NET.Sdk.Web">
+
+    <PropertyGroup>
+        <TargetFramework>net6.0</TargetFramework>
+        <Nullable>enable</Nullable>
+        <ImplicitUsings>enable</ImplicitUsings>
+        <DockerDefaultTargetOS>Linux</DockerDefaultTargetOS>
+    </PropertyGroup>
+
+    <ItemGroup>
+      <_ContentIncludedByDefault Remove="Auth.EfCore\Auth.EfCore\obj\Auth.EfCore.csproj.nuget.dgspec.json" />
+      <_ContentIncludedByDefault Remove="Auth.EfCore\Auth.EfCore\obj\project.assets.json" />
+      <_ContentIncludedByDefault Remove="Auth.EfCore\Auth.EfCore\obj\project.packagespec.json" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="6.0.28" />
+      <PackageReference Include="Microsoft.Data.SqlClient" Version="5.2.0" />
+      <PackageReference Include="Microsoft.EntityFrameworkCore" Version="6.0.28" />
+      <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="6.0.28">
+        <PrivateAssets>all</PrivateAssets>
+        <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+      </PackageReference>
+      <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="6.0.28" />
+      <PackageReference Include="Microsoft.Extensions.DependencyInjection.Abstractions" Version="9.0.0-preview.2.24128.5" />
+      <PackageReference Include="Microsoft.IdentityModel.Tokens" Version="7.4.1" />
+      <PackageReference Include="Microsoft.SqlServer.Server" Version="1.0.0" />
+      <PackageReference Include="System.IdentityModel.Tokens.Jwt" Version="7.4.1" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <Content Include="..\.dockerignore">
+        <Link>.dockerignore</Link>
+      </Content>
+    </ItemGroup>
+
+</Project>

@@ -1,0 +1,49 @@
+version: '3.7'
+
+services:
+  db:
+      image: mcr.microsoft.com/mssql/server:2019-latest
+      environment:
+        SA_PASSWORD: "YourStrong@Passw0rd"
+        ACCEPT_EULA: "Y"
+      ports:
+        - "1433:1433"
+      volumes:
+        - ./db_data:/var/opt/mssql
+        
+  product:
+      build:
+        context: ./Product
+        dockerfile: Dockerfile
+      ports:
+        - "5003:80"
+      depends_on:
+        - db
+      environment:
+        - ASPNETCORE_ENVIRONMENT=Development
+        - ConnectionStrings__DefaultConnection=Server=db;Database=ProductDb;User=sa;Password=YourStrong@Passw0rd
+
+  auth:
+    build:
+      context: ./Auth
+      dockerfile: Dockerfile
+    ports:
+      - "5001:80"
+    depends_on:
+      - db
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Development
+      - ConnectionStrings__DefaultConnection=Server=db;Database=AuthDb;User=sa;Password=YourStrong@Passw0rd
+
+  gateway:
+    build:
+      context: ./Gateway
+      dockerfile: Dockerfile
+    ports:
+      - "5002:80"
+    depends_on:
+      - auth
+
+  
+
+  
